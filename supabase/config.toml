@@ -1,0 +1,7 @@
+# 両方の関数でCORSとJWT検証を関数内で明示的に実施します。
+# profile関数はAuthorizationヘッダーをSupabase Authで検証します。
+[functions.profile]
+verify_jwt = false
+
+[functions.emergency]
+verify_jwt = false

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#c91524">
+  <meta name="robots" content="noindex,nofollow">
+  <title>緊急・災害時 医療情報</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="home">
+<header class="app-header">
+  <div>
+    <h1>緊急・災害時 医療情報</h1>
+    <p>NFC・アプリ用</p>
+  </div>
+  <span class="header-icon" aria-hidden="true">✚</span>
+</header>
+<main class="container">
+  <section class="status-card" id="localStatus" aria-live="polite">
+    <div class="status-dot"></div>
+    <div><h2>登録状態を確認中</h2><p>端末内の医療情報を読み込んでいます。</p></div>
+  </section>
+
+  <section class="home-actions">
+    <a class="action-card primary" href="setup.html"><span>✎</span><div><strong>医療情報を登録・編集</strong><small>入力途中は端末へ自動保存</small></div></a>
+    <a class="action-card" href="display.html"><span>＋</span><div><strong>緊急医療情報を表示</strong><small>救急隊・医療従事者向け表示</small></div></a>
+    <button class="action-card" type="button" id="installApp"><span>▣</span><div><strong>アプリとして追加</strong><small>ホーム画面から起動できます</small></div></button>
+  </section>
+
+  <section class="card">
+    <h2>端末内バックアップ</h2>
+    <p class="muted">機種変更や誤削除に備えて、暗号化されていないJSONファイルを安全な場所に保管してください。</p>
+    <div class="button-row">
+      <button class="secondary-btn" id="exportData" type="button">バックアップを書き出す</button>
+      <label class="secondary-btn file-label">バックアップを読み込む<input id="importData" type="file" accept="application/json" hidden></label>
+    </div>
+  </section>
+
+  <section class="card" id="cloudCard">
+    <h2>NFC用クラウド連携</h2>
+    <p class="cloud-status" data-cloud-status aria-live="polite">クラウド設定を確認しています。</p>
+    <div id="cloudUnconfigured" class="notice soft hidden">
+      <strong>クラウドは未設定です。</strong>
+      <p>この端末ではアプリとして使えます。別のスマートフォンからNFCで表示するには、READMEのSupabase設定が必要です。</p>
+    </div>
+    <div id="authPanel" class="hidden">
+      <div id="signedOutPanel">
+        <div class="two-col">
+          <label>メールアドレス<input id="authEmail" type="email" autocomplete="email"></label>
+          <label>パスワード<input id="authPassword" type="password" autocomplete="current-password" minlength="12"></label>
+        </div>
+        <div class="button-row">
+          <button class="primary-btn" id="signIn" type="button">ログイン</button>
+          <button class="secondary-btn" id="signUp" type="button">新規登録</button>
+        </div>
+      </div>
+      <div id="signedInPanel" class="hidden">
+        <p><strong id="signedInEmail"></strong> でログイン中</p>
+        <div class="button-row">
+          <button class="primary-btn" id="syncCloud" type="button">端末の情報をクラウドへ同期</button>
+          <button class="secondary-btn" id="loadCloud" type="button">クラウドの情報を端末へ読み込む</button>
+          <button class="secondary-btn" id="signOut" type="button">ログアウト</button>
+        </div>
+        <div id="publicUrlPanel" class="nfc-url-panel hidden">
+          <h3>NFCタグへ書き込む固定URL</h3>
+          <textarea id="publicUrl" readonly rows="3"></textarea>
+          <div class="button-row">
+            <button class="primary-btn" id="copyPublicUrl" type="button">URLをコピー</button>
+            <a class="secondary-btn" id="openPublicUrl" target="_blank" rel="noopener">表示確認</a>
+          </div>
+          <p class="muted">NFCタグには、このURLだけを書き込みます。医療情報を更新してもタグの書き直しは不要です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card danger-zone">
+    <h2>この端末の登録情報を削除</h2>
+    <p>端末内だけを削除します。クラウドへ保存した情報は削除されません。</p>
+    <button class="danger-btn" id="deleteLocal" type="button">端末内の医療情報を削除</button>
+  </section>
+</main>
+<footer class="app-footer">緊急時は、この情報だけで判断せず、本人・家族・医療機関へ確認してください。</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.7"></script>
+<script src="cloud-config.js"></script>
+<script src="cloud.js"></script>
+<script src="data.js"></script>
+<script src="db.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

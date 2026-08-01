@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#c91524">
+  <meta name="robots" content="noindex,nofollow">
+  <title>医療情報の登録・編集</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="setup">
+<header class="app-header compact">
+  <a class="back-link" href="index.html" aria-label="メニューへ戻る">‹</a>
+  <div><h1>医療情報の登録・編集</h1><p>入力内容は端末へ自動保存されます</p></div>
+</header>
+<div class="step-bar">
+  <div><strong id="stepCount">1 / 7</strong><span id="stepName">基本情報</span></div>
+  <div class="progress"><span id="progressFill"></span></div>
+</div>
+<main class="container setup-container">
+  <div class="notice"><strong>個人情報を含みます。</strong> 共用端末では入力しないでください。</div>
+  <div id="wizard"></div>
+  <nav class="wizard-nav" aria-label="入力手順">
+    <button class="secondary-btn" id="prevStep" type="button">前へ</button>
+    <button class="primary-btn" id="nextStep" type="button">次へ</button>
+  </nav>
+</main>
+<datalist id="drugCandidates"></datalist>
+<datalist id="diseaseCandidates"></datalist>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.7"></script>
+<script src="cloud-config.js"></script>
+<script src="cloud.js"></script>
+<script src="data.js"></script>
+<script src="db.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
